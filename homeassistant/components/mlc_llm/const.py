@@ -1,0 +1,20 @@
+"""Constants for the MLC-LLM integration."""
+
+DOMAIN = "mlc_llm"
+
+# 配置字段
+CONF_MAX_HISTORY = "max_history"
+CONF_MODEL = "model"
+CONF_PROMPT = "prompt"
+CONF_TEMPERATURE = "temperature"
+
+# 默认值
+DEFAULT_HOST = "localhost"
+DEFAULT_PORT = 8000
+DEFAULT_TIMEOUT = 5.0
+DEFAULT_MAX_HISTORY = 20
+DEFAULT_TEMPERATURE = 0.7
+DEFAULT_CHAT_COMPLETION_MAX_TOP_LOGPROBS = 20
+
+# 其他常量
+DEFAULT_NAME = "MLC-LLM"
