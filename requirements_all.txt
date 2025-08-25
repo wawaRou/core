@@ -1914,6 +1914,9 @@ pydaikin==2.15.0
 # homeassistant.components.danfoss_air
 pydanfossair==0.1.0
 
+# homeassistant.components.mlc_llm
+pydantic==2.11.7
+
 # homeassistant.components.deako
 pydeako==0.6.0
 

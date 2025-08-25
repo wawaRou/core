@@ -12,12 +12,15 @@
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   // Port 5683 udp is used by Shelly integration
-  "appPort": ["8123:8123", "5683:5683/udp"],
+  // 使用 host 模式，因此无需端口转发
+  // "appPort": ["8123:8123", "5683:5683/udp"],
   "runArgs": [
     "-e",
     "GIT_EDITOR=code --wait",
     "--security-opt",
-    "label=disable"
+    "label=disable",
+    // 使用 host 模式，方便直接访问本地部署的模型
+    "--network=host"
   ],
   "customizations": {
     "vscode": {
