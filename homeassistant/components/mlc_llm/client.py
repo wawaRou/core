@@ -16,7 +16,12 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .const import DEFAULT_TIMEOUT
 from .exception import MLCLLMError, MLCLLMRequestError, MLCLLMResponseError
-from .openai_api_protocol import ChatCompletionRequest, ChatCompletionStreamResponse
+from .openai_api_protocol import (
+    ChatCompletionMessage,
+    ChatCompletionRequest,
+    ChatCompletionStreamResponse,
+    ChatTool,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -98,12 +103,12 @@ class MLCLLMClient:
     async def chat_stream(
         self,
         *,
-        messages: list[Mapping[str, Any]],
+        messages: list[Mapping[str, Any] | ChatCompletionMessage],
         model: str | None = None, # in mlc-llm, a host only run a single model
         max_tokens: int | None = None,
         temperature: float | None = None,
         top_p: float | None = None,
-        tools: list[dict[str, Any]] | None = None,
+        tools: list[dict[str, Any] | ChatTool] | None = None,
         **kwargs: Any,
     ) -> AsyncIterator[ChatCompletionStreamResponse]:
         """Chat completion using OpenAI-compatible API with streaming."""
@@ -162,8 +167,6 @@ class MLCLLMClient:
 
                             try:
                                 chunk_data = json.loads(line)
-
-                                # Check for errors in response
                                 if error := chunk_data.get("error"):
                                     raise MLCLLMResponseError(f"Stream error: {error}")
 

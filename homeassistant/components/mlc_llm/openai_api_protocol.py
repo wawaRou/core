@@ -10,18 +10,6 @@ from .const import DEFAULT_CHAT_COMPLETION_MAX_TOP_LOGPROBS
 from .exception import MLCLLMRequestError
 
 
-class ChatFunction(BaseModel):
-    """Chat function definition."""
-    description: str | None = None
-    name: str
-    parameters: dict
-
-
-class ChatTool(BaseModel):
-    """Chat tool definition."""
-    type: Literal["function"]
-    function: ChatFunction
-
 class TopLogProbs(BaseModel):
     """Top log probabilities of a token."""
     token: str
@@ -58,6 +46,19 @@ class CompletionUsage(BaseModel):
     extra: dict[str, Any] | None = None
     """Extra metrics and info that may be returned by debug_config
     """
+
+class ChatFunction(BaseModel):
+    """Chat function definition."""
+    description: str | None = None
+    name: str
+    parameters: dict
+
+
+class ChatTool(BaseModel):
+    """Chat tool definition."""
+    type: Literal["function"]
+    function: ChatFunction
+
 
 class ChatFunctionCall(BaseModel):
     """OpenAI chat function call protocol."""

@@ -1,0 +1,59 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up MLC-LLM",
+        "description": "Configure your MLC-LLM server connection",
+        "data": {
+          "url": "[%key:common::config_flow::data::url%]"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_service%]"
+    },
+    "error": {
+      "invalid_url": "[%key:common::config_flow::error::invalid_host%]",
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_response": "Invalid response from server",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    }
+  },
+
+  "config_subentries": {
+    "conversation": {
+      "initiate_flow": {
+        "user": "Add conversation agent",
+        "reconfigure": "Reconfigure conversation agent"
+      },
+      "entry_type": "Conversation agent",
+      "step": {
+        "set_options": {
+          "data": {
+            "model": "Model",
+            "name": "[%key:common::config_flow::data::name%]",
+            "prompt": "[%key:common::config_flow::data::prompt%]",
+            "llm_hass_api": "[%key:common::config_flow::data::llm_hass_api%]",
+            "temperature": "Temperature",
+            "max_tokens": "Max tokens",
+            "max_history": "Max history messages"
+          },
+          "data_description": {
+            "model": "The model running on the MLC-LLM server",
+            "prompt": "Instruct how the LLM should respond. This can be a template.",
+            "temperature": "Controls randomness in the model's responses. Lower values make responses more focused and deterministic.",
+            "max_tokens": "Maximum number of tokens to generate in the response. Leave empty for model default.",
+            "max_history": "Maximum number of previous messages to include in conversation context"
+          }
+        }
+      },
+      "abort": {
+        "reconfigure_successful": "[%key:common::config_flow::abort::reconfigure_successful%]",
+        "entry_not_loaded": "Failed to add agent. The MLC-LLM integration is not loaded.",
+        "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+        "no_models_available": "No models available on the MLC-LLM server",
+        "unknown": "[%key:common::config_flow::error::unknown%]"
+      }
+    }
+  }
+}
